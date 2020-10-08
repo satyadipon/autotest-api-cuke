@@ -31,6 +31,7 @@ public class Utils {
 
 	public static RequestSpecification req;
 	
+	/* To generate RequestSpecification */
 	public RequestSpecification requestSpecification() throws IOException
 	{
 		
@@ -48,6 +49,7 @@ public class Utils {
 		
 	}
 	
+	/* this method is to fetch base url from the external properties fiel */
 	public static String getGlobalValue(String key) throws IOException
 	{
 		Properties prop =new Properties();
@@ -59,7 +61,7 @@ public class Utils {
 		
 	}
 	
-	
+	/* To extract response */
 	public String getJsonPath(Response response,String key)
 	{
 		  String resp=response.asString();
@@ -67,6 +69,7 @@ public class Utils {
 		return js.get(key).toString();
 	}
 	
+	/* To generate a map for query parameter */
 	public Map<String, String> createMap(String key, String value){
 		
 		Map<String, String> map = new HashMap<String, String>();
@@ -75,6 +78,7 @@ public class Utils {
 		
 	}
 	
+	/* To generate a map for query parameter */
 	public Map<String, String> createMap(String key, String value, String key2, String value2){
 		
 		Map<String, String> map = new HashMap<String, String>();
@@ -85,7 +89,7 @@ public class Utils {
 	}
 	
 	
-	
+	/* To get date */
 	public String getCurrentDate() {
 		DateTimeFormatter formatter = DateTimeFormatter
 				.ofPattern("yyyy-MM-dd")

@@ -23,11 +23,13 @@ public class Steps extends Utils
 	ResponseSpecification resspec;
 	Response response;
 
+	/* Initialize RequestSpecification by calling this steps */
 	@Given("^Get the latest foreign exchange reference rates$")
 	public void get_the_latest_foreign_exchange_reference_rates() throws Throwable {
 		res=given().spec(requestSpecification());
 	}
 
+	/* Step to execute lastest endpoint and get response without any query parameter */
 	@When("^user calls \"([^\"]*)\" with \"([^\"]*)\" http request$")
 	public void user_calls_something_with_something_http_request(String resource, String method) throws Throwable {
 		APIResources resourceAPI=APIResources.valueOf(resource);
@@ -39,7 +41,8 @@ public class Steps extends Utils
 		if(method.equalsIgnoreCase("GET"))
 			response =res.when().get(resourceAPI.getResource());
 	}
-
+	
+	/* Step to execute lastest endpoint and get response with query parameter symbol */
 	@When("^user calls \"([^\"]*)\" with \"([^\"]*)\" http request and \"([^\"]*)\" parameter$")
 	public void user_calls_something_with_something_http_request_and_something_parameter(String resource, String method, String currency) throws Throwable {
 
@@ -54,6 +57,7 @@ public class Steps extends Utils
 
 	}
 	
+	/* Step to execute lastest endpoint and get response with query parameter symbol and base */
 	@When("^user calls \"([^\"]*)\" with \"([^\"]*)\" http request and \"([^\"]*)\" parameter and \"([^\"]*)\" parameter$")
     public void user_calls_something_with_something_http_request_and_something_parameter_and_something_parameter(String resource, String method, String currency, String base) throws Throwable {
 		
@@ -68,6 +72,7 @@ public class Steps extends Utils
 	
 	}
 	
+	/* Step to execute lastest endpoint and get response with query parameter symbol, base and past date*/
 	@When("^user calls \"([^\"]*)\" with \"([^\"]*)\" http request and \"([^\"]*)\" and \"([^\"]*)\" parameter and \"([^\"]*)\" parameter$")
     public void user_calls_something_with_something_http_request_and_something_and_something_parameter_and_something_parameter(String resource, String method, String pastDate, String currency, String base) throws Throwable {
 		APIResources resourceAPI=APIResources.valueOf(resource);
@@ -81,22 +86,25 @@ public class Steps extends Utils
     }
 
 
-
+	/* Step to assert response code 200 */
 	@Then("^the API call got success with status code 200$")
 	public void the_api_call_got_success_with_status_code_200() throws Throwable {
 		assertEquals(response.getStatusCode(),200);
 	}
 
+	/* Step to assert currentdate from the response body */
 	@And("^\"([^\"]*)\" in response body should be the current date$")
 	public void something_in_response_body_should_be_the_current_date(String keyValue) throws Throwable {
 		assertEquals(getJsonPath(response,keyValue), getCurrentDate());
 	}
 	
+	/* Step to assert provided date from the response body */
 	@And("^\"([^\"]*)\" in response body is \"([^\"]*)\"$")
 	public void something_in_response_body_is_something(String keyValue, String Expectedvalue) throws Throwable {
 		assertEquals(getJsonPath(response,keyValue),Expectedvalue);
 	}
 
+	/* Step to assert currency from the response body */
 	@And("^verify currency exchange rate is available for \"([^\"]*)\" in response body$")
 	public void verify_currency_exchange_rate_is_available_for_something_in_response_body(String keyValue) throws Throwable {
 
